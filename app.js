@@ -27,7 +27,7 @@ hbs.registerHelper('block', function (name) {
 
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
-app.use(express.static('public'));
+app.use(express.static('static'));
 
 
 app.get('/', function (req, res) {
