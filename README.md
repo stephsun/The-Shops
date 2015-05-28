@@ -1,2 +1,2 @@
 # The-Shops
-Convert my bookmarks of shopping sites into a website
+Integrate my bookmarked shopping sites into a website
