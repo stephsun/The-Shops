@@ -1,5 +1,7 @@
+'use strict';
+
 var express = require('express');
-var app = express()
+var app = express();
 var hbs = require('hbs');
 var path = require('path');
 
@@ -34,7 +36,7 @@ app.get('/', function (req, res) {
     res.render('index', {
         title: 'The Shops'
     });
-})
+});
 
 app.get('/:brand', function (req, res) {
     var brands = {
@@ -49,7 +51,7 @@ app.get('/:brand', function (req, res) {
         title: req.params.brand,
         url: brands[req.params.brand]
     });
-})
+});
 
 var server = app.listen(3000, function () {
 
@@ -57,4 +59,4 @@ var server = app.listen(3000, function () {
     var port = server.address().port;
 
     console.log('Example app listening at https://%s:%s', host, port);
-})
+});

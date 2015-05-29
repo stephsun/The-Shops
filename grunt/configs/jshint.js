@@ -1,8 +1,16 @@
 'use strict';
 
 module.exports = {
-    options: {
-        jshintrc: '.jshintrc'
-    },
-    src: ['app.js']
+	server: {
+		options: {
+        	jshintrc: '.jshintrc-node'
+    	},
+    	src: ['*.js']
+	},
+	site: {
+		options: {
+        	jshintrc: '.jshintrc-browser'
+    	},
+    	src: ['static/javascirpts/*.js']
+	}
 };
