@@ -14,6 +14,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.12.4",
-    "hbs": "^3.0.1"
+    "hbs": "^3.0.1",
+    "lodash": "^3.9.3"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.2"
   }
 }
