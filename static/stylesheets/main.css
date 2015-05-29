@@ -2,6 +2,10 @@ html, body, #wrapper, #page-content-wrapper, .container-fluid, .row, .my-col {
     height: 100%;
 }
 
+.container-fluid {
+    padding: 0;
+}
+
 iframe {
     border-width: 0;
     width: 100%;
