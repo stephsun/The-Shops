@@ -1,12 +1,13 @@
 'use strict';
 
 var express = require('express');
-var app = express();
 var hbs = require('hbs');
 var path = require('path');
 
+var app = express();
+
 app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views/templates'));
+app.set('views', path.join(__dirname, 'templates'));
 
 var blocks = {};
 
@@ -27,7 +28,7 @@ hbs.registerHelper('block', function (name) {
     return val;
 });
 
-hbs.registerPartials(path.join(__dirname, 'views/partials'));
+hbs.registerPartials(path.join(__dirname, 'templates/partials'));
 
 app.use(express.static('static'));
 
