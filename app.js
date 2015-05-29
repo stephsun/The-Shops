@@ -35,10 +35,16 @@ app.use(express.static('static'));
 app.get('/', require('./views/index').renderIndexPage);
 app.get('/:brand', require('./views/contents').renderBrandPage);
 
+var bunyan = require('bunyan');
+var logger = bunyan.createLogger({
+    name: 'app',
+    level: 'trace'
+});
+
 var server = app.listen(3000, function () {
 
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at https://%s:%s', host, port);
+    logger.info('Example app listening at https://%s:%s', host, port);
 });

@@ -16,7 +16,8 @@ module.exports = function(grunt) {
     var config = loadConfig('./grunt/configs/');
     grunt.initConfig(config);
 
+    grunt.loadNpmTasks('grunt-bunyan');
     grunt.loadNpmTasks('grunt-contrib-jshint');
 
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['bunyan', 'jshint']);
 };
