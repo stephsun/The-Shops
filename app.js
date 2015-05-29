@@ -32,27 +32,8 @@ hbs.registerPartials(path.join(__dirname, 'templates/partials'));
 
 app.use(express.static('static'));
 
-
-app.get('/', function (req, res) {
-    res.render('index', {
-        title: 'The Shops'
-    });
-});
-
-app.get('/:brand', function (req, res) {
-    var brands = {
-        jcrew: 'http://www.jcrew.com/index.jsp',
-        af: 'http://www.abercrombie.com/shop/us',
-        netaporter: 'http://www.net-a-porter.com/us/en/'
-    };
-
-    console.log(req.params.brand);
-
-    res.render('content', {
-        title: req.params.brand,
-        url: brands[req.params.brand]
-    });
-});
+app.get('/', require('./apis/index').renderIndexPage);
+app.get('/:brand', require('./apis/contents').renderBrandPage);
 
 var server = app.listen(3000, function () {
 
