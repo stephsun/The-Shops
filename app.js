@@ -32,8 +32,8 @@ hbs.registerPartials(path.join(__dirname, 'templates/partials'));
 
 app.use(express.static('static'));
 
-app.get('/', require('./apis/index').renderIndexPage);
-app.get('/:brand', require('./apis/contents').renderBrandPage);
+app.get('/', require('./views/index').renderIndexPage);
+app.get('/:brand', require('./views/contents').renderBrandPage);
 
 var server = app.listen(3000, function () {
 
