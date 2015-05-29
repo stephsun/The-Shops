@@ -35,6 +35,9 @@ app.use(express.static('static'));
 app.get('/', require('./views/index').renderIndexPage);
 app.get('/:brand', require('./views/contents').renderBrandPage);
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/the_shops');
+
 var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'app',
