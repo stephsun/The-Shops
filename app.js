@@ -35,14 +35,17 @@ app.use(express.static('static'));
 app.get('/', require('./views/index').renderIndexPage);
 app.get('/:brand', require('./views/contents').renderBrandPage);
 
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/the_shops');
-
 var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'app',
     level: 'trace'
 });
+
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/the_shops');
+var BrandModel = require('./models/Brand').model;
+BrandModel.getBrandUrl('af');
+// BrandModel.addBrand('netaporter', 'NET-A-PORTER', 'http://www.net-a-porter.com/us/en/');
 
 var server = app.listen(3000, function () {
 
