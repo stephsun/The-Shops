@@ -5,6 +5,7 @@ var logger = bunyan.createLogger({
     name: 'app',
     level: 'trace'
 });
+var q = require('q');
 
 var renderBrandPage = function (req, res) {
     var name = req.params.brand;
@@ -17,8 +18,10 @@ var renderBrandPage = function (req, res) {
             title: doc.longName,
             url: doc.url
         });
+        // TODO: handle doc not found
     }).fail(function (err) {
         next(err);
+        // TODO: 404, 500 pages handlers
     });
 };
 
