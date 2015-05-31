@@ -19,7 +19,8 @@
     "hbs": "^3.0.1",
     "lodash": "^3.9.3",
     "mongodb": "^2.0.33",
-    "mongoose": "^4.0.4"
+    "mongoose": "^4.0.4",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
