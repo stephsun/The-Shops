@@ -1,5 +1,6 @@
 'use strict';
 
+var q = require('q');
 var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'app',
@@ -11,13 +12,16 @@ var Schema = mongoose.Schema;
 
 var brandSchema = new Schema({
     name: {
-        type: String
+        type: String,
+        unique: true,
+        required: true
     },
     longName: {
         type: String
     },
     url: {
-        type: String
+        type: String,
+        required: true
     }
 });
 
@@ -27,16 +31,18 @@ brandSchema.statics.addBrand = function (name, longName, url) {
         longName: longName,
         url: url
     });
-    brand.save();
+    var defer = q.defer();
+    brand.save(defer.makeNodeResolver());
+    return defer.promise;
 }
 
-brandSchema.statics.getBrandUrl = function (name) {
+brandSchema.statics.getBrand = function (name) {
+    var defer = q.defer();
     this
     .findOne()
     .where({ name: name })
-    .exec(function (err, doc) {
-        logger.info(doc.url);
-    });
+    .exec(defer.makeNodeResolver());
+    return defer.promise;
 }
 
 module.exports = {
