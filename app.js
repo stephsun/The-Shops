@@ -3,6 +3,11 @@
 var express = require('express');
 var hbs = require('hbs');
 var path = require('path');
+var bunyan = require('bunyan');
+var logger = bunyan.createLogger({
+    name: 'app',
+    level: 'trace'
+});
 
 var app = express();
 
@@ -32,20 +37,11 @@ hbs.registerPartials(path.join(__dirname, 'templates/partials'));
 
 app.use(express.static('static'));
 
-app.get('/', require('./views/index').renderIndexPage);
-app.get('/:brand', require('./views/contents').renderBrandPage);
-
-var bunyan = require('bunyan');
-var logger = bunyan.createLogger({
-    name: 'app',
-    level: 'trace'
-});
-
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/the_shops');
-var BrandModel = require('./models/Brand').model;
-BrandModel.getBrandUrl('af');
-// BrandModel.addBrand('netaporter', 'NET-A-PORTER', 'http://www.net-a-porter.com/us/en/');
+
+app.get('/', require('./views/index').renderIndexPage);
+app.get('/:brand', require('./views/contents').renderBrandPage);
 
 var server = app.listen(3000, function () {
 
