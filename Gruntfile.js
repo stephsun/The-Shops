@@ -18,11 +18,22 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-bunyan');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-env');
 
-    grunt.registerTask('default', ['env', 'bunyan', 'jshint']);
+    grunt.loadTasks('./grunt/tasks');
+
+    grunt.registerTask('default', [
+        'env',
+        'bunyan',
+        'jshint', 
+        'launch',
+        'watch'
+    ]);
 
     grunt.registerTask('heroku:production', [
-        'default'
+        'env',
+        'bunyan',
+        'jshint', 
     ]);
 };
