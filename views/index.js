@@ -2,7 +2,8 @@
 
 var renderIndexPage = function (req, res) {
     res.render('index', {
-        title: 'The Shops'
+        title: 'The Shops',
+        url: 'https://www.jcrew.com/index.jsp'
     });
 };
 
