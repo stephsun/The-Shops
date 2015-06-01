@@ -43,7 +43,7 @@ mongoose.connect(process.env.MONGOLAB_URI);
 app.get('/', require('./views/index').renderIndexPage);
 app.get('/:brand', require('./views/contents').renderBrandPage);
 
-var server = app.listen(3000, function () {
+var server = app.listen(process.env.PORT, function () {
 
     var host = server.address().address;
     var port = server.address().port;
