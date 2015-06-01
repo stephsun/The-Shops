@@ -41,7 +41,8 @@ var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI);
 
 app.get('/', require('./views/index').renderIndexPage);
-app.get('/:brand', require('./views/contents').renderBrandPage);
+app.get('/brand/:brand', require('./views/contents').renderBrandPage);
+app.get('/admin', require('./views/admin').renderAdminPage);
 
 var server = app.listen(process.env.PORT, function () {
 
