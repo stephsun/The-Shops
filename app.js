@@ -38,7 +38,7 @@ hbs.registerPartials(path.join(__dirname, 'templates/partials'));
 app.use(express.static('static'));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/the_shops');
+mongoose.connect(process.env.MONGOLAB_URI);
 
 app.get('/', require('./views/index').renderIndexPage);
 app.get('/:brand', require('./views/contents').renderBrandPage);

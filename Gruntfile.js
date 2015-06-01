@@ -18,8 +18,9 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-bunyan');
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-env');
 
-    grunt.registerTask('default', ['bunyan', 'jshint']);
+    grunt.registerTask('default', ['env', 'bunyan', 'jshint']);
 
     grunt.registerTask('heroku:production', [
         'default'
