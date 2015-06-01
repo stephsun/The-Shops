@@ -1,8 +1,17 @@
 html, body, #wrapper, #page-content-wrapper, .container-fluid, .row, .my-col {
     height: 100%;
+    width: 100%;
 }
 
 .container-fluid {
+    padding: 0;
+}
+
+.row {
+    margin: 0;
+}
+
+.my-col {
     padding: 0;
 }
 
