@@ -1,6 +1,7 @@
 html, body, #wrapper, #page-content-wrapper, .container-fluid, .row, .col-lg-12 {
     height: 100%;
     width: 100%;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container-fluid {
@@ -23,9 +24,7 @@ iframe {
 
 .line {
     width: 150px;
-    /*margin-left: 50px;*/
     background: #dddddd;
     height: 1px;
-    /*position: absolute;*/
     bottom: 0px;
 }
