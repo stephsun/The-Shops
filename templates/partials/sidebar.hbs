@@ -6,29 +6,11 @@
                 </a>
                 <div class="line">
             </li>
+            {{#each brands}}
             <li>
-                <a href="/brand/jcrew">J.CREW</a>
+                <a href="/brand/{{name}}">{{longName}}</a>
                 <div class="line">
             </li>
-            <li>
-                <a href="/brand/af">Abercrombie & Fitch</a>
-                <div class="line">
-            </li>
-            <li>
-                <a href="/brand/netaporter">NET-A-PORTER</a>
-                <div class="line">
-            </li>
-            <li>
-                <a href="/brand/tuula">Tuula</a>
-                <div class="line">
-            </li>
-            <li>
-                <a href="/brand/framboisefashion" style="font-size: 13px;">FRAMBOISE FASHION</a>
-                <div class="line">
-            </li>
-            <li>
-                <a href="/brand/anouska">ANOUSKA</a>
-                <div class="line">
-            </li>
+            {{/each}}
         </ul>
     </div>

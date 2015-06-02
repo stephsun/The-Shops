@@ -45,6 +45,14 @@ brandSchema.statics.getBrand = function (name) {
     return defer.promise;
 }
 
+brandSchema.statics.getAllBrands = function () {
+    var defer = q.defer();
+    this
+    .find()
+    .exec(defer.makeNodeResolver());
+    return defer.promise;
+}
+
 module.exports = {
     model: mongoose.model('Brand', brandSchema),
     schema: brandSchema

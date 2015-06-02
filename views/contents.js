@@ -12,12 +12,17 @@ var renderBrandPage = function (req, res) {
     var BrandModel = require('../models/Brand').model;
     
     q.resolve().then(function () {
-        return BrandModel.getBrand(name);
-    }).then(function (doc) {
+        return q.all([
+            BrandModel.getBrand(name),
+            BrandModel.getAllBrands()
+        ]);
+    }).spread(function (brand, brandList) {
         res.render('content', {
-            title: doc.longName,
-            url: doc.url
+            title: brand.longName,
+            url: brand.url,
+            brands: brandList
         });
+        logger.info(brandList);
         // TODO: handle doc not found
     }).fail(function (err) {
         next(err);
