@@ -1,8 +1,19 @@
 'use strict';
 
+var q = require('q');
+
 var renderAdminPage = function (req, res) {
-    res.render('admin', {
-        title: 'Edit'
+    var BrandModel = require('../models/Brand').model;
+
+    q.resolve().then(function () {
+        return BrandModel.getAllBrands()
+    }).then(function (brandList) {
+        res.render('admin', {
+            title: 'Edit',
+            brands: brandList
+        });
+    }).fail(function (err) {
+        next(err);
     });
 };
 
