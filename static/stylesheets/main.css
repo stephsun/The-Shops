@@ -1,18 +1,11 @@
-html, body, #wrapper, #page-content-wrapper, .container-fluid, .row, .full-width {
+html, body, #wrapper, #page-content-wrapper, .full-width {
     height: 100%;
     width: 100%;
     font-family: 'Open Sans', sans-serif;
 }
 
-.container-fluid {
-    padding: 0;
-}
-
-.row {
-    margin: 0;
-}
-
 .full-width {
+    margin: 0;
     padding: 0;
 }
 
