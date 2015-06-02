@@ -22,6 +22,10 @@ var brandSchema = new Schema({
     url: {
         type: String,
         required: true
+    },
+    rank: {
+        type: Number,
+        unique: true
     }
 });
 
@@ -49,6 +53,7 @@ brandSchema.statics.getAllBrands = function () {
     var defer = q.defer();
     this
     .find()
+    .sort({rank: 'asc'})
     .exec(defer.makeNodeResolver());
     return defer.promise;
 }
