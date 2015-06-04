@@ -1,10 +1,15 @@
 'use strict';
 
 var q = require('q');
+var bunyan = require('bunyan');
+var logger = bunyan.createLogger({
+    name: 'app',
+    level: 'trace'
+});
+
+var BrandModel = require('../models/Brand').model;
 
 var renderAdminPage = function (req, res) {
-    var BrandModel = require('../models/Brand').model;
-
     q.resolve().then(function () {
         return BrandModel.getAllBrands()
     }).then(function (brandList) {
@@ -17,6 +22,28 @@ var renderAdminPage = function (req, res) {
     });
 };
 
+var addNewBrand = function (req, res) {
+    var longName = req.body.longName;
+    var url = req.body.url;
+    var name = longName.toLowerCase();
+    q.resolve().then(function () {
+        return BrandModel.addBrand(name, longName, url)
+    }).then(function () {
+        logger.info('Added sucessfully!');
+        res.render('admin', {
+            succeeded: true,
+            message: 'Added sucessfully'
+        });
+    }).fail(function (err) {
+        res.render('admin', {
+            succeeded: false,
+            message: 'Added failed'
+        });
+        next(err);
+    });
+}
+
 module.exports = {
-    renderAdminPage: renderAdminPage
+    renderAdminPage: renderAdminPage,
+    addNewBrand: addNewBrand
 };
