@@ -3,6 +3,7 @@
 var express = require('express');
 var hbs = require('hbs');
 var path = require('path');
+var bodyParser = require('body-parser');
 var bunyan = require('bunyan');
 var logger = bunyan.createLogger({
     name: 'app',
@@ -36,6 +37,9 @@ hbs.registerHelper('block', function (name) {
 hbs.registerPartials(path.join(__dirname, 'templates/partials'));
 
 app.use(express.static('static'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGOLAB_URI);
