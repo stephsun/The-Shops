@@ -34,8 +34,6 @@ var addBrand = function (req, res) {
             res.render('admin', {
                 title: 'Edit',
                 brands: brandList,
-                isSuccessful: true,
-                message: 'Added sucessfully'
             });
         });
     }).fail(function () {
@@ -43,8 +41,6 @@ var addBrand = function (req, res) {
             res.render('admin', {
                 title: 'Edit',
                 brands: brandList,
-                isSuccessful: false,
-                message: 'Adding failed',
             });
         });
     });
