@@ -17,10 +17,12 @@ var brandSchema = new Schema({
         required: true
     },
     longName: {
-        type: String
+        type: String,
+        unique: true
     },
     url: {
         type: String,
+        unique: true,
         required: true
     },
     rank: {
@@ -37,6 +39,15 @@ brandSchema.statics.addBrand = function (name, longName, url) {
     });
     var defer = q.defer();
     brand.save(defer.makeNodeResolver());
+    return defer.promise;
+}
+
+brandSchema.statics.deleteBrand = function (url) {
+    var defer = q.defer();
+    this
+    .findOne()
+    .where({ url: url })
+    .remove(defer.makeNodeResolver());
     return defer.promise;
 }
 

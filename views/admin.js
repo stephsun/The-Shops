@@ -29,7 +29,7 @@ var addBrand = function (req, res) {
 
     q.resolve().then(function () {
         return BrandModel.addBrand(name, longName, url);
-    }).then(function (brand) {
+    }).then(function () {
         return BrandModel.getAllBrands().then(function (brandList) {
             res.render('admin', {
                 title: 'Edit',
@@ -40,18 +40,28 @@ var addBrand = function (req, res) {
         });
     }).fail(function () {
         return BrandModel.getAllBrands().then(function(brandList) {
-            logger.info(brandList)
             res.render('admin', {
                 title: 'Edit',
                 brands: brandList,
                 isSuccessful: false,
-                message: 'Added failed',
+                message: 'Adding failed',
             });
         });
     });
 }
 
+var deleteBrand = function (req, res) {
+    q.resolve().then(function () {
+        return BrandModel.deleteBrand(req.body.url);
+    }).then(function () {
+        res.send(true);
+    }).fail(function (err) {
+        res.send(err);
+    });
+}
+
 module.exports = {
     renderAdminPage: renderAdminPage,
-    addBrand: addBrand
+    addBrand: addBrand,
+    deleteBrand: deleteBrand
 };
