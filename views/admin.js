@@ -22,21 +22,24 @@ var renderAdminPage = function (req, res) {
     });
 };
 
-var addNewBrand = function (req, res) {
+var addBrand = function (req, res) {
     var longName = req.body.longName;
     var url = req.body.url;
     var name = longName.toLowerCase();
     q.resolve().then(function () {
-        return BrandModel.addBrand(name, longName, url)
-    }).then(function () {
-        logger.info('Added sucessfully!');
+        return BrandModel.addBrand(name, longName, url);
+    }).then(function (brand) {
+        return BrandModel.getAllBrands();
+    }).then(function (brandList) {
         res.render('admin', {
-            succeeded: true,
+            title: 'Edit',
+            brands: brandList,
+            isSuccessful: true,
             message: 'Added sucessfully'
         });
     }).fail(function (err) {
-        res.render('admin', {
-            succeeded: false,
+        res.render('admin', {            
+            isSuccessful: false,
             message: 'Added failed'
         });
         next(err);
@@ -45,5 +48,5 @@ var addNewBrand = function (req, res) {
 
 module.exports = {
     renderAdminPage: renderAdminPage,
-    addNewBrand: addNewBrand
+    addBrand: addBrand
 };
