@@ -1,3 +1,7 @@
+{{#extend "javascripts"}}
+    <script type="text/javascript" src="/javascripts/main.js"></script>
+{{/extend}}
+
 {{#extend "stylesheets"}}
     <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
 {{/extend}}
@@ -14,18 +18,21 @@
 
                 <div class="alert {{#if isSuccessful}} alert-success {{else}} alert-danger {{/if}}" role="alert" {{#unless message}} style="display: none;"{{/unless}}>{{message}}</div>
 
-<form action="/admin" method="post">
+
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
+                            <th data-field="order">Order</th>
                             <th data-field="name">Name</th>
                             <th data-field="url">Link</th>
-                            <th data-field="order">Order</th>
                             <th data-field="actions">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
+                        <form action="/admin" method="post">
+                            <td>
+                            </td>
                             <td>
                                 <input type="text" class="form-control" id="brandName" name ="longName" placeholder="e.g., J.CREW. The brand name you typed will appear exactly the same in the sidebar">
                             </td>
@@ -33,27 +40,26 @@
                                 <input type="url" class="form-control" id="brandUrl" name="url" placeholder="e.g., https://www.jcrew.com/">
                             </td>
                             <td>
-                            </td>
-                            <td>
                                 <button type="submit" class="btn btn-default">Save</button>
                             </td>
                         </tr>
+                        </form>
                         {{#each brands}}
                         <tr>
+                            <td>{{rank}}</td>
                             <td>{{longName}}</td>
                             <td>{{url}}</td>
-                            <td>{{rank}}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="...">
                                   <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></button>
-                                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></button>
+                                  <button type="button" class="btn btn-default brand-delete"><span class="glyphicon glyphicon-trash"></span></button>
                                 </div>
                             </td>
                         </tr>
                         {{/each}}
                     <tbody>
                 </table>
-</form>
+
             </div>
         </div>
     </div>
