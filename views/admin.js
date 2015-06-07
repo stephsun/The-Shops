@@ -14,7 +14,7 @@ var renderAdminPage = function (req, res) {
         return BrandModel.getAllBrands()
     }).then(function (brandList) {
         res.render('admin', {
-            title: 'Edit',
+            title: 'Admin Page',
             brands: brandList
         });
     }).fail(function (err) {
@@ -32,14 +32,14 @@ var addBrand = function (req, res) {
     }).then(function () {
         return BrandModel.getAllBrands().then(function (brandList) {
             res.render('admin', {
-                title: 'Edit',
+                title: 'Admin Page',
                 brands: brandList,
             });
         });
     }).fail(function () {
         return BrandModel.getAllBrands().then(function(brandList) {
             res.render('admin', {
-                title: 'Edit',
+                title: 'Admin Page',
                 brands: brandList,
             });
         });

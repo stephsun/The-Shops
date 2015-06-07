@@ -9,7 +9,7 @@ var renderIndexPage = function (req, res) {
 		return BrandModel.getAllBrands();
 	}).then(function (brandList) {
 		res.render('index', {
-        	title: 'The Shops',
+        	title: 'J.Crew',
         	url: 'https://www.jcrew.com/index.jsp',
         	brands: brandList
     	});
