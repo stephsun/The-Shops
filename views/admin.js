@@ -30,24 +30,29 @@ var editBrand = function (req, res) {
     var url = req.body.url;
     var rank = req.body.rank;
 
-    if (action === 'edit') {
-        q.resolve().then(function () {
+    q.resolve().then(function () {
+        if (action === 'edit') {
             return BrandModel.addBrand(name, longName, url);
-        }).then(function () {
-            logger.info('Added');
-        }).fail(function (err) {
-            next(err);
-        });
-    } else if (action === 'delete') {
-        q.resolve().then(function () {
+        } else if (action === 'delete') {
             return BrandModel.deleteBrand(id);
-        }).then(function () {
-            logger.info('Deleted');
-        }).fail(function (err) {
-            next(err);
+        }
+    }).then(function () {
+        return BrandModel.getAllBrands().then(function (brandList) {
+            res.render('admin', {
+                title: 'Admin Page',
+                brands: brandList,
+            })
         });
-    }
-}
+    }).fail(function (err) {
+        return BrandModel.getAllBrands().then(function (brandList) {
+            res.render('admin', {
+                title: 'Admin Page',
+                brands: brandList,
+                message: err
+            })
+        });
+    });
+};
 
 module.exports = {
     renderAdminPage: renderAdminPage,
