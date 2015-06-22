@@ -37,20 +37,9 @@ var editBrand = function (req, res) {
             return BrandModel.deleteBrand(id);
         }
     }).then(function () {
-        return BrandModel.getAllBrands().then(function (brandList) {
-            res.render('admin', {
-                title: 'Admin Page',
-                brands: brandList,
-            })
-        });
+        res.status(200).send();
     }).fail(function (err) {
-        return BrandModel.getAllBrands().then(function (brandList) {
-            res.render('admin', {
-                title: 'Admin Page',
-                brands: brandList,
-                message: err
-            })
-        });
+        res.status(500).send(err);
     });
 };
 
