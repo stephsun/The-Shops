@@ -22,42 +22,34 @@ var renderAdminPage = function (req, res) {
     });
 };
 
-var addBrand = function (req, res) {
+var editBrand = function (req, res) {
+    var action = req.body.action;
+    var id = req.body.id;
+    var name = req.body.name;
     var longName = req.body.longName;
     var url = req.body.url;
-    var name = longName.toLowerCase();
+    var rank = req.body.rank;
 
-    q.resolve().then(function () {
-        return BrandModel.addBrand(name, longName, url);
-    }).then(function () {
-        return BrandModel.getAllBrands().then(function (brandList) {
-            res.render('admin', {
-                title: 'Admin Page',
-                brands: brandList,
-            });
+    if (action === 'edit') {
+        q.resolve().then(function () {
+            return BrandModel.addBrand(name, longName, url);
+        }).then(function () {
+            logger.info('Added');
+        }).fail(function (err) {
+            next(err);
         });
-    }).fail(function () {
-        return BrandModel.getAllBrands().then(function(brandList) {
-            res.render('admin', {
-                title: 'Admin Page',
-                brands: brandList,
-            });
+    } else if (action === 'delete') {
+        q.resolve().then(function () {
+            return BrandModel.deleteBrand(id);
+        }).then(function () {
+            logger.info('Deleted');
+        }).fail(function (err) {
+            next(err);
         });
-    });
-}
-
-var deleteBrand = function (req, res) {
-    q.resolve().then(function () {
-        return BrandModel.deleteBrand(req.body.url);
-    }).then(function () {
-        res.send(true);
-    }).fail(function (err) {
-        res.send(err);
-    });
+    }
 }
 
 module.exports = {
     renderAdminPage: renderAdminPage,
-    addBrand: addBrand,
-    deleteBrand: deleteBrand
+    editBrand: editBrand
 };

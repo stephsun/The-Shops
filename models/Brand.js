@@ -42,11 +42,11 @@ brandSchema.statics.addBrand = function (name, longName, url) {
     return defer.promise;
 }
 
-brandSchema.statics.deleteBrand = function (url) {
+brandSchema.statics.deleteBrand = function (id) {
     var defer = q.defer();
     this
     .findOne()
-    .where({ url: url })
+    .where({ _id: id })
     .remove(defer.makeNodeResolver());
     return defer.promise;
 }

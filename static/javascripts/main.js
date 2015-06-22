@@ -6,20 +6,14 @@
             $( "#menu-toggle" ).find("span").toggleClass("glyphicon-chevron-right");
         });
 
-        $(".brand-delete").click(function (e) {
-            e.preventDefault();
-            var that = this;
-            var url = $(this).closest('td').prev('td').text();
-            var data = { url: url };
-            $.ajax({
-                url: '/admin',
-                data: data,
-                type: 'DELETE',
-                success: function(result) {
-                    if (result === true)
-                        $(that).closest('tr').remove();
-                }
-            });
-        })
+        $('#tabledit').Tabledit({
+            url: '/admin/edit',
+            hideIdentifier: true,
+            restoreButton: false,
+            columns: {
+                identifier: [0, 'id'],
+                editable: [[1, 'name'], [2, 'longName'], [3, 'url'], [4, 'rank']]
+            }
+        });
     });
 }();
