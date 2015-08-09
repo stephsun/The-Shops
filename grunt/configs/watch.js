@@ -2,7 +2,7 @@
 
 module.exports = {
     site: {
-        files: ['app']
+        files: ['models/*.js', 'views/*.js']
     },
     js: {
         files: ['static/javascripts/*.js'],
