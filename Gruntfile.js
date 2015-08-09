@@ -16,10 +16,10 @@ module.exports = function(grunt) {
     var config = loadConfig('./grunt/configs/');
     grunt.initConfig(config);
 
+    grunt.loadNpmTasks('grunt-env');
     grunt.loadNpmTasks('grunt-bunyan');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-env');
 
     grunt.loadTasks('./grunt/tasks');
 

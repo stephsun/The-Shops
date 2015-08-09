@@ -1,10 +1,10 @@
 'use strict';
 
 module.exports = {
-	site: {
-		files: ['app']
-	},
-	js: {
+    site: {
+        files: ['app']
+    },
+    js: {
         files: ['static/javascripts/*.js'],
     },
 };
