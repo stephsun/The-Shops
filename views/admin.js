@@ -22,6 +22,16 @@ var renderAdminPage = function (req, res) {
     });
 };
 
+var getAllBrands = function (req, res) {
+    q.resolve().then(function () {
+        return BrandModel.getAllBrands()
+    }).then(function (brandList) {
+        res.send(brandList);
+    }).fail(function (err) {
+        next(err);
+    });
+}
+
 var editBrand = function (req, res) {
     var action = req.body.action;
     var id = req.body.id;
@@ -45,5 +55,6 @@ var editBrand = function (req, res) {
 
 module.exports = {
     renderAdminPage: renderAdminPage,
+    getAllBrands: getAllBrands,
     editBrand: editBrand
 };
