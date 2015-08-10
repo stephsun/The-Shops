@@ -31,8 +31,8 @@ var Brand = React.createClass({
         var brand = this.props.brand;
         return (
             <tr>
-                <td>{brand.name}</td>
                 <td>{brand.longName}</td>
+                <td>{brand.name}</td>
                 <td>{brand.url}</td>
                 <td>{brand.rank}</td>
                 <td>
@@ -70,7 +70,7 @@ var BrandList = React.createClass({
                 <thead>
                     <tr>
                         <th>Brand Name</th>
-                        <th>Description</th>
+                        <th>Name</th>
                         <th>Website</th>
                         <th>No.</th>
                         <th>Actions</th>
