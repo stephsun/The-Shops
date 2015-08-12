@@ -9,6 +9,10 @@ html, body, #wrapper, #page-content-wrapper, .full-width {
     padding: 0;
 }
 
+body {
+    padding-bottom: 50px;
+}
+
 iframe {
     border-width: 0;
     width: 100%;
