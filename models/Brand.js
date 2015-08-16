@@ -31,11 +31,12 @@ var brandSchema = new Schema({
     }
 });
 
-brandSchema.statics.addBrand = function (name, longName, url) {
+brandSchema.statics.addBrand = function (name, longName, url, rank) {
     var brand = new this({
         name: name,
         longName: longName,
-        url: url
+        url: url,
+        rank: rank
     });
     var defer = q.defer();
     brand.save(defer.makeNodeResolver());
