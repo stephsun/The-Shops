@@ -26,9 +26,26 @@ var getAllBrands = function (req, res) {
     q.resolve().then(function () {
         return BrandModel.getAllBrands()
     }).then(function (brandList) {
+        logger.info(brandList);
         res.send(brandList);
     }).fail(function (err) {
         next(err);
+    });
+}
+
+var addBrand = function (req, res) {
+    var longName = req.body.longName;
+    var url = req.body.url;
+    var rank = req.body.rank;
+    var name = longName;
+    // var name = longName.replace(/[^a-zA-Z0-9]+/g,'');
+    q.resolve().then(function () {
+        return BrandModel.addBrand(name, longName, url, rank);
+    }).spread(function () {
+        res.status(200).send();
+    }).fail(function (err) {
+        logger.error(err);
+        res.status(400).send(err);
     });
 }
 
@@ -49,12 +66,14 @@ var editBrand = function (req, res) {
     }).then(function () {
         res.status(200).send();
     }).fail(function (err) {
-        res.status(500).send(err);
+        logger.error(err);
+        res.status(400).send(err);
     });
 };
 
 module.exports = {
     renderAdminPage: renderAdminPage,
     getAllBrands: getAllBrands,
+    addBrand: addBrand,
     editBrand: editBrand
 };

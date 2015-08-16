@@ -48,6 +48,7 @@ app.get('/', require('./views/index').renderIndexPage);
 app.get('/brand/:brand', require('./views/contents').renderBrandPage);
 app.get('/admin', require('./views/admin').renderAdminPage);
 app.get('/admin/all', require('./views/admin').getAllBrands);
+app.post('/admin/all', require('./views/admin').addBrand);
 app.post('/admin/edit', require('./views/admin').editBrand);
 
 var server = app.listen(process.env.PORT, function () {
