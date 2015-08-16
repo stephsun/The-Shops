@@ -37,8 +37,9 @@ var addBrand = function (req, res) {
     var longName = req.body.longName;
     var url = req.body.url;
     var rank = req.body.rank;
-    var name = longName;
-    // var name = longName.replace(/[^a-zA-Z0-9]+/g,'');
+    var name = longName;    
+    name =  name.replace(/[^a-zA-Z0-9]+/g,'').toLowerCase();
+
     q.resolve().then(function () {
         return BrandModel.addBrand(name, longName, url, rank);
     }).spread(function () {

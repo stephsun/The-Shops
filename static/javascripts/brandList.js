@@ -79,7 +79,7 @@ var BrandForm = React.createClass({
     if (!brandName || !website || !rank) {
       return;
     }
-    this.props.onBrandSubmit({brandName: brandName, website: website, rank: rank});
+    this.props.onBrandSubmit(brandName, website, rank);
     React.findDOMNode(this.refs.brandName).value = '';
     React.findDOMNode(this.refs.website).value = '';
     React.findDOMNode(this.refs.rank).value = '';
