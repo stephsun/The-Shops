@@ -1,88 +1,100 @@
-var NewBrand = React.createClass({
-    getInitialState: function () {
-        return {
-            name: "",
-            url: "",
-        };
-    },
-    handleNameChange: function (event) {
-        this.setState({ name: event.target.value })
-    },
-    handleUrlChange: function (event) {
-        this.setState({ url: event.target.value })
-    },
-    render: function () {
-        return (
+var BrandTable = React.createClass({
+  getInitialState: function() {
+    return {data: []};
+  },
+  handleBrandSubmit: function(brandName, website, rank) {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'POST',
+      data: {'longName': brandName, 'url': website, 'rank': rank},
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  componentDidMount: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  render: function () {
+    var brandNodes = this.state.data.map(function (brand) {
+      return (
+        <Brand brand={brand} />
+      );
+    });
+    return (
+      <div>
+        <BrandForm onBrandSubmit={this.handleBrandSubmit}/>
+        <table className="brandTable table table-striped table-hover">
+          <thead>
             <tr>
-                <td><input type="text" name="name" onChange={this.handleNameChange} /></td>
-                <td><input type="text" name="longName" /></td>
-                <td><input type="text" name="url" onChange={this.handleUrlChange} /></td>
-                <td><input type="text" name="rank" /></td>
-                <td>
-                    <button type="button" className="btn btn-default" disabled={this.state.name.length === 0 || this.state.url.length === 0}>Add</button>
-                </td>
+              <th>Brand Name</th>
+              <th>Name</th>
+              <th>Website</th>
+              <th>No.</th>
+              <th>Actions</th>
             </tr>
-            );
-    }
+          </thead>
+          <tbody>
+            {brandNodes}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
 });
 
 var Brand = React.createClass({
-    render: function () {
-        var brand = this.props.brand;
-        return (
-            <tr>
-                <td>{brand.longName}</td>
-                <td>{brand.name}</td>
-                <td>{brand.url}</td>
-                <td>{brand.rank}</td>
-                <td>
-                    <div className="btn-group" role="group">
-                        <button type="button" className="btn btn-default">Edit</button>
-                        <button type="button" className="btn btn-default">Delete</button>
-                    </div>
-                </td>
-            </tr>
-            );
-    }
+  render: function () {
+    return (
+      <tr className="brand">
+        <td>{this.props.brand.name}</td>
+        <td>{this.props.brand.longName}</td>
+        <td>{this.props.brand.url}</td>
+        <td>{this.props.brand.rank}</td>
+      </tr>
+    );
+  }
 });
 
-var BrandList = React.createClass({
-    getInitialState: function () {
-        return {
-            brands: []
-        };
-    },
-    componentWillMount: function () {
-        $.get(this.props.source, function (data) {
-            this.setState({
-                brands: data
-            });
-        }.bind(this));
-    },
-    render: function() {
-        var source = this.props.source;
-        var trs = [];
-        for (var i = 0; i < this.state.brands.length; i++) {
-            trs.push(<Brand brand={ this.state.brands[i] } />);
-        }
-        return (
-            <table className="table table-striped table-hover">
-                <thead>
-                    <tr>
-                        <th>Brand Name</th>
-                        <th>Name</th>
-                        <th>Website</th>
-                        <th>No.</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <NewBrand />
-                    {trs}
-                </tbody>
-            </table>
-            );
+var BrandForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var brandName = React.findDOMNode(this.refs.brandName).value.trim();
+    var website = React.findDOMNode(this.refs.website).value.trim();
+    var rank = React.findDOMNode(this.refs.rank).value.trim();
+    if (!brandName || !website || !rank) {
+      return;
     }
+    this.props.onBrandSubmit({brandName: brandName, website: website, rank: rank});
+    React.findDOMNode(this.refs.brandName).value = '';
+    React.findDOMNode(this.refs.website).value = '';
+    React.findDOMNode(this.refs.rank).value = '';
+    return;
+  },
+  render: function() {
+    return (
+      <form className="brandForm" onSubmit={this.handleSubmit}>
+        <input type="text" placeholder="Brand Name" ref="brandName" />
+        <input type="text" placeholder="Website" ref="website" />
+        <input type="text" placeholder="Rank" ref="rank" />
+        <input type="submit" className="btn btn-default" value="Post" />
+      </form>
+    );
+  }
 });
- 
-React.render(<BrandList source="/admin/all" />, document.getElementById('example'));
+
+React.render(<BrandTable url="/admin/all" />, document.getElementById("example"));
