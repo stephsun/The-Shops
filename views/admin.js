@@ -10,16 +10,9 @@ var logger = bunyan.createLogger({
 var BrandModel = require('../models/Brand').model;
 
 var renderAdminPage = function (req, res) {
-    q.resolve().then(function () {
-        return BrandModel.getAllBrands()
-    }).then(function (brandList) {
-        res.render('admin', {
-            title: 'Admin Page',
-            brands: brandList
-        });
-    }).fail(function (err) {
-        next(err);
-    });
+    res.render('admin',
+        {title: 'Admin Page'}
+    );
 };
 
 var getAllBrands = function (req, res) {
@@ -42,30 +35,27 @@ var addBrand = function (req, res) {
 
     q.resolve().then(function () {
         return BrandModel.addBrand(name, longName, url, rank);
-    }).spread(function () {
-        res.status(200).send();
+    }).then(function () {
+        logger.info('adding complete');
+        res.status(200).json({});
     }).fail(function (err) {
         logger.error(err);
-        res.status(400).send(err);
+        res.status(400).json(err);
     });
 }
 
-var editBrand = function (req, res) {
-    var action = req.body.action;
-    var id = req.body.id;
-    var name = req.body.name;
-    var longName = req.body.longName;
-    var url = req.body.url;
-    var rank = req.body.rank;
+var deleteBrand = function (req, res) {
+    logger.info(req.body);
+    logger.info(req.body._id);
+    var id = req.body._id;
 
     q.resolve().then(function () {
-        if (action === 'edit') {
-            return BrandModel.addBrand(name, longName, url);
-        } else if (action === 'delete') {
-            return BrandModel.deleteBrand(id);
-        }
-    }).then(function () {
-        res.status(200).send();
+        return q.all([
+            BrandModel.deleteBrand(id),
+            BrandModel.getAllBrands()
+        ]);
+    }).spread(function (flag, brandList) {
+        res.send(brandList);
     }).fail(function (err) {
         logger.error(err);
         res.status(400).send(err);
@@ -76,5 +66,5 @@ module.exports = {
     renderAdminPage: renderAdminPage,
     getAllBrands: getAllBrands,
     addBrand: addBrand,
-    editBrand: editBrand
+    deleteBrand: deleteBrand
 };
