@@ -19,6 +19,9 @@ var Navbar = React.createClass({
           <li className="pull-right">
             <a href="#menu-toggle" className={this.state.fullSize ? "hidden" : ""} onClick={this.handleClick}><span className="glyphicon glyphicon-resize-full"></span></a>
           </li>
+          <li className="pull-right">
+            <a href="/admin"><span className="glyphicon glyphicon-edit"></span></a>
+          </li>
         </ul>
       );
   }
