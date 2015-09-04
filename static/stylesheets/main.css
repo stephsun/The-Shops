@@ -26,16 +26,21 @@ iframe {
     bottom: 0px;
 }
 
-.welcome {
+#logo_parent {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#logo {
     width: 500px;
     height: 134px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -72px 0 0 -250px;
     border: 5px solid black;
     font-size: 72px;
     text-align: center;
+    position: relative;
+    top: 40%;
+    margin: auto;
 }
 
 .hidden {
