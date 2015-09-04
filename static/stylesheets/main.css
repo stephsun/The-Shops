@@ -1,10 +1,10 @@
-html, body, #wrapper, #page-content-wrapper, .full-width {
+html, body, #wrapper, #page-content-wrapper {
     height: 100%;
-    width: 100%;
     font-family: 'Open Sans', sans-serif;
 }
 
 .full-width {
+    height: 100%;
     margin: 0;
     padding: 0;
 }
