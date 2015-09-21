@@ -9,7 +9,7 @@ var renderIndexPage = function (req, res) {
 		return BrandModel.getAllBrands();
 	}).then(function (brandList) {
 		res.render('index', {
-        	title: 'Home',
+        	title: 'Shop all your favorite brands in one place',
         	brands: brandList
     	});
 	}).fail(function (err) {
