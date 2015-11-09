@@ -23,7 +23,8 @@
     position: fixed;
     left: 250px;
     width: 0;
-    height: 90%;
+    /*height: 90%;*/
+    height: 100%;
     margin-left: -250px;
     overflow: hidden;
     overflow-y: scroll;

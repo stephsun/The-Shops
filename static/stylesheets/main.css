@@ -9,9 +9,9 @@ html, body, #wrapper, #page-content-wrapper {
     padding: 0;
 }
 
-body {
+/*body {
     padding-bottom: 50px;
-}
+}*/
 
 iframe {
     border-width: 0;
