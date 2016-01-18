@@ -1,6 +1,7 @@
 var Navbar = React.createClass({
   getInitialState: function () {
-    return { fullSize: $(window).width() < 768 };
+    // return { fullSize: $(window).width() < 768 };
+    return { fullSize: true };
   },
   handleClick: function (e) {
     if (this.state.fullSize) {
@@ -10,11 +11,14 @@ var Navbar = React.createClass({
     };
     $( "#wrapper" ).toggleClass("toggled");
   },
+  mouseOver: function(e) {
+    $( "#wrapper" ).toggleClass("toggled");
+  },
   render: function () {
       return (
         <ul className="nav nav-tabs">
           <li>
-            <a href="#menu-toggle" className={this.state.fullSize ? "" : "hidden"} onClick={this.handleClick}><span className="glyphicon glyphicon-menu-hamburger"></span></a>
+            <a href="#menu-toggle" className={this.state.fullSize ? "" : "hidden"} onClick={this.handleClick} onMouseOver={this.mouseOver}><span className="glyphicon glyphicon-menu-hamburger"></span></a>
           </li>
           <li className="pull-right">
             <a href="#menu-toggle" className={this.state.fullSize ? "hidden" : ""} onClick={this.handleClick}><span className="glyphicon glyphicon-resize-full"></span></a>
