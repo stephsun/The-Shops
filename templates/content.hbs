@@ -1,4 +1,6 @@
-
+{{#extend "javascripts"}}
+  <script type="text/jsx" src="/javascripts/nav.js"></script>
+{{/extend}}
 
 {{#extend "stylesheets"}}
   <link rel="stylesheet" type="text/css" href="/stylesheets/simple-sidebar.css">
@@ -8,6 +10,7 @@
 <div class="container-fluid full-size">
   <div id="wrapper">
     {{> sidebar }}
+    {{> nav }}
     <div id="page-content-wrapper">
         <div class="row full-size">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 full-size">
@@ -16,5 +19,4 @@
         </div>
     </div>
   </div>
-  {{> nav }}
 </div>

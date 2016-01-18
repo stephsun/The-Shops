@@ -12,7 +12,7 @@ var Navbar = React.createClass({
   },
   render: function () {
       return (
-        <ul className="nav nav-tabs navbar-fixed-bottom">
+        <ul className="nav nav-tabs">
           <li>
             <a href="#menu-toggle" className={this.state.fullSize ? "" : "hidden"} onClick={this.handleClick}><span className="glyphicon glyphicon-menu-hamburger"></span></a>
           </li>
