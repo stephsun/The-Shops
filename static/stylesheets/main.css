@@ -49,7 +49,12 @@ iframe {
 }
 
 .hidden {
-    display:none;
+    display: none;
+}
+
+.toggle-nav a {
+    color: black;
+    text-decoration: none !important;
 }
 
 @media(min-width:768px) {

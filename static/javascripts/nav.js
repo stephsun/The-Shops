@@ -12,7 +12,7 @@ var Navbar = React.createClass({
   },
   render: function () {
       return (
-        <ul className="nav nav-tabs">
+        <ul className="nav nav-tabs toggle-nav">
           <li>
             <a href="#menu-toggle" className={this.state.fullSize ? "" : "hidden"} onClick={this.handleClick}>Show Brands</a>
           </li>
