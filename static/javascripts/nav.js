@@ -1,7 +1,6 @@
 var Navbar = React.createClass({
   getInitialState: function () {
-    // return { fullSize: $(window).width() < 768 };
-    return { fullSize: true };
+    return { fullSize: $(window).width() < 768 };
   },
   handleClick: function (e) {
     if (this.state.fullSize) {
